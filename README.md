@@ -1,4 +1,9 @@
-## My portfolio
 
+# My portfolio
 Developed with NextJS and TailwindCSS
-by Facundo Venturi
+
+
+## Authors
+
+- [@fakuventuri](https://github.com/fakuventuri)
+

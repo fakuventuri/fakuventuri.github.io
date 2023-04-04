@@ -83,8 +83,8 @@ export default function Home() {
             className={"flex justify-center absolute bottom-5 right-0 left-0"}
           >
             <div
-              className={`animate-bounce bg-neutral-950 p-2 w-10 h-10 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg rounded-full flex items-center justify-center md:cursor-pointer ${
-                isArrowVisible ? "animate-fadeIn" : "animate-fadeOut"
+              className={`bg-neutral-950 p-2 w-10 h-10 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg rounded-full flex items-center justify-center md:cursor-pointer ${
+                isArrowVisible ? "animate-bounce" : "animate-fadeOut"
               }`}
               onClick={() => {
                 scrollToSection("about");

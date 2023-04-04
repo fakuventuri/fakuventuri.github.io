@@ -2,25 +2,15 @@ import { useEffect, useState } from "react";
 
 import Head from "next/head";
 
+import { scrollToSection } from "@/utils/tools.js";
+
 import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [isArrowVisible, setIsArrowVisible] = useState(true);
   const [topArrowVisible, setTopArrowVisible] = useState(false);
-  const [forceHidden, setForceHidden] = useState(false);
-
-  const hideArrowOnOpen = (hide) => {
-    if (hide) {
-      setForceHidden(hide);
-      setIsArrowVisible(false);
-    } else {
-      setForceHidden(false);
-      if (window.scrollY < 200) {
-        setIsArrowVisible(true);
-      }
-    }
-  };
 
   const listenToScroll = () => {
     const winScroll =
@@ -30,7 +20,7 @@ export default function Home() {
       isArrowVisible && // to limit setting state only the first time
         setIsArrowVisible(false);
     } else {
-      !forceHidden && setIsArrowVisible(true);
+      setIsArrowVisible(true);
     }
 
     if (winScroll > 500) {
@@ -44,11 +34,6 @@ export default function Home() {
     window.addEventListener("scroll", listenToScroll);
     return () => window.removeEventListener("scroll", listenToScroll);
   });
-
-  useEffect(() => {
-    hideArrowOnOpen(open);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
 
   return (
     <>
@@ -67,17 +52,8 @@ export default function Home() {
         py-20 px-6
       "
       >
-        <section className="min-h-screen text-center">
-          <h1 className="text-white text-3xl font-bold mt-5">Lorem ipsum</h1>
-          <p className="text-white text-2xl font-bold mt-5">
-            Ullamco dolore elit fugiat nisi reprehenderit sit ullamco amet
-            laboris enim culpa. Velit laboris ullamco esse sunt commodo commodo
-            proident. Anim ullamco commodo sunt cupidatat anim id nisi non
-            laboris id. Enim aliqua deserunt velit elit. Amet irure qui in enim
-            amet enim reprehenderit ad aliqua esse pariatur laboris est ea.
-            Consectetur laboris sint eiusmod dolore do exercitation. Nulla
-            ullamco ex irure enim irure.
-          </p>
+        <section className="text-center h-[calc(100vh-80px)]">
+          <Hero />
 
           <div
             className={"flex justify-center absolute bottom-5 right-0 left-0"}
@@ -105,15 +81,27 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="min-h-screen scroll-mt-20">
+        <section id="about" className="min-h-screen scroll-mt-20 text-center">
           <h1 className="text-white text-3xl font-bold">About</h1>
+          <p className="text-white text-2xl font-bold mt-5">
+            Ullamco dolore elit fugiat nisi reprehenderit sit ullamco amet
+            laboris enim culpa. Velit laboris ullamco esse sunt commodo commodo
+            proident. Anim ullamco commodo sunt cupidatat anim id nisi non
+            laboris id. Enim aliqua deserunt velit elit. Amet irure qui in enim
+            amet enim reprehenderit ad aliqua esse pariatur laboris est ea.
+            Consectetur laboris sint eiusmod dolore do exercitation. Nulla
+            ullamco ex irure enim irure.
+          </p>
         </section>
 
-        <section id="projects" className="min-h-screen scroll-mt-20">
+        <section
+          id="projects"
+          className="min-h-screen scroll-mt-20 text-center"
+        >
           <h1 className="text-white text-3xl font-bold">Projects</h1>
         </section>
 
-        <section id="contact" className="min-h-screen scroll-mt-20">
+        <section id="contact" className="min-h-screen scroll-mt-20 text-center">
           <h1 className="text-white text-3xl font-bold">Contact</h1>
         </section>
 
@@ -154,9 +142,4 @@ export default function Home() {
       </main>
     </>
   );
-}
-
-function scrollToSection(e) {
-  var targetSection = document.getElementById(e);
-  targetSection.scrollIntoView({ behavior: "smooth" });
 }

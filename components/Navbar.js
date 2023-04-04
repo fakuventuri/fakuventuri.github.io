@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
+
+import { scrollToSection } from "@/utils/tools.js";
 
 function MobileNav({ open, setOpen }) {
   return (
@@ -43,7 +44,7 @@ function MobileNav({ open, setOpen }) {
 
 export default function Navbar({ open, setOpen }) {
   return (
-    <nav className="fixed top-0 left-0 right-0 flex filter bg-gradient-to-b from-neutral-950 backdrop-blur-lg px-4 h-20 items-center">
+    <nav className="fixed top-0 left-0 right-0 flex filter bg-gradient-to-b from-neutral-950 backdrop-blur-lg px-4 h-20 items-center z-50">
       <MobileNav open={open} setOpen={setOpen} />
       <div className="w-full flex items-center justify-start">
         <a
@@ -110,9 +111,4 @@ export default function Navbar({ open, setOpen }) {
       </div>
     </nav>
   );
-}
-
-function scrollToSection(e) {
-  var targetSection = document.getElementById(e);
-  targetSection.scrollIntoView({ behavior: "smooth" });
 }

@@ -112,7 +112,7 @@ export default function Home() {
 
         <section
           id="skills"
-          className="min-h-[calc(100vh-80px)] w-screen scroll-mt-20 text-center my-10"
+          className="min-h-[calc(100vh-80px)] w-screen scroll-mt-20 text-center mb-10"
         >
           <Skills />
         </section>

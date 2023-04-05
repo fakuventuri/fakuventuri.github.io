@@ -1,4 +1,5 @@
 import React from "react";
+import { RevealList } from "next-reveal";
 
 const Skills = () => {
   const skills = [
@@ -26,7 +27,12 @@ const Skills = () => {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto lg:text-center">
         <h2 className="text-3xl font-bold text-gray-100 mb-4">Skills</h2>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <RevealList
+          interval={25}
+          delay={25}
+          reset={false}
+          className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+        >
           {skills.map((skill) => (
             <div key={skill.name} className="group">
               <div
@@ -39,7 +45,7 @@ const Skills = () => {
               </div>
             </div>
           ))}
-        </div>
+        </RevealList>
       </div>
     </div>
   );

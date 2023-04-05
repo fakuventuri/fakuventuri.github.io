@@ -1,8 +1,6 @@
 import React from "react";
 
-import { scrollToSection } from "@/utils/tools.js";
-
-function MobileNav({ open, setOpen }) {
+function MobileNav({ open, setOpen, scrollToParam }) {
   return (
     <div
       className={`absolute top-20 left-0 h-screen w-2/3 bg-black/95 transform ${
@@ -13,16 +11,16 @@ function MobileNav({ open, setOpen }) {
         <a
           className="text-xl font-medium my-4 text-neutral-300"
           onClick={() => {
-            scrollToSection("about");
+            scrollToParam("skills");
             setOpen(false);
           }}
         >
-          About
+          Skills
         </a>
         <a
           className="text-xl font-medium my-4 text-neutral-300"
           onClick={() => {
-            scrollToSection("projects");
+            scrollToParam("projects");
             setOpen(false);
           }}
         >
@@ -31,7 +29,7 @@ function MobileNav({ open, setOpen }) {
         <a
           className="text-xl font-medium my-4 text-neutral-300"
           onClick={() => {
-            scrollToSection("contact");
+            scrollToParam("contact");
             setOpen(false);
           }}
         >
@@ -42,15 +40,15 @@ function MobileNav({ open, setOpen }) {
   );
 }
 
-export default function Navbar({ open, setOpen }) {
+export default function Navbar({ open, setOpen, scrollToParam }) {
   return (
     <nav className="fixed top-0 left-0 right-0 flex filter bg-gradient-to-b from-neutral-950 backdrop-blur-lg px-4 h-20 items-center z-50">
-      <MobileNav open={open} setOpen={setOpen} />
+      <MobileNav open={open} setOpen={setOpen} scrollToParam={scrollToParam} />
       <div className="w-full flex items-center justify-start">
         <a
           className="text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer"
           onClick={() => {
-            scrollTo(0, 0);
+            scrollToParam("main");
             setOpen(false);
           }}
         >
@@ -72,7 +70,7 @@ export default function Navbar({ open, setOpen }) {
           />
           <span
             className={`h-1 w-full bg-white rounded-lg transition-all duration-300 ease-in-out ${
-              open ? "w-0 hidden" : "w-full"
+              open ? "animate-fadeOut" : "w-full"
             }`}
           />
           <span
@@ -86,15 +84,15 @@ export default function Navbar({ open, setOpen }) {
           <a
             className="text-xl text-neutral-300 md:cursor-pointer"
             onClick={() => {
-              scrollToSection("about");
+              scrollToParam("skills");
             }}
           >
-            About
+            Skills
           </a>
           <a
             className="text-xl text-neutral-300 md:cursor-pointer"
             onClick={() => {
-              scrollToSection("projects");
+              scrollToParam("projects");
             }}
           >
             Projects
@@ -102,7 +100,7 @@ export default function Navbar({ open, setOpen }) {
           <a
             className="text-xl text-neutral-300 md:cursor-pointer pr-4"
             onClick={() => {
-              scrollToSection("contact");
+              scrollToParam("contact");
             }}
           >
             Contact

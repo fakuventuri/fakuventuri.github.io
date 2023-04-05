@@ -1,18 +1,63 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import Head from "next/head";
 
 import { scrollToSection } from "@/utils/tools.js";
 
 import Navbar from "@/components/Navbar";
+import ScrollArrows from "@/components/ScrollArrows";
 import Hero from "@/components/Hero";
+import Skills from "@/components/Skills";
+
+const sections = ["main", "skills", "projects", "contact"];
 
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [isArrowVisible, setIsArrowVisible] = useState(true);
   const [topArrowVisible, setTopArrowVisible] = useState(false);
 
-  const listenToScroll = () => {
+  const [currentSection, setCurrentSection] = useState(0);
+
+  const scrollTimeout = useRef();
+  const scrolling = useRef(false);
+  const noScroll = useRef(false);
+  //const previousClientY = useRef(0);
+
+  const handleWheel = (e) => {
+    e.preventDefault();
+
+    //clearTimeout(scrollTimeout.current);
+
+    if (noScroll.current) {
+      return;
+    }
+
+    if (scrolling.current) {
+      scrollTimeout.current = setTimeout(() => {
+        scrolling.current = false;
+        noScroll.current = false;
+      }, 400);
+      noScroll.current = true;
+    }
+
+    if (scrolling.current) {
+      return;
+    }
+
+    if (e.deltaY > 0) {
+      // scroll down
+      scrollToParam("next");
+    } else {
+      // scroll up
+      scrollToParam("prev");
+    }
+  };
+
+  // const handleTouchMove = (e) => {
+  //   // e.preventDefault();
+  // };
+
+  const handleScrollOnlyMobile = (e) => {
     const winScroll =
       document.body.scrollTop || document.documentElement.scrollTop;
 
@@ -31,8 +76,14 @@ export default function Home() {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", listenToScroll);
-    return () => window.removeEventListener("scroll", listenToScroll);
+    window.addEventListener("mousewheel", handleWheel, { passive: false });
+    // window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("scroll", handleScrollOnlyMobile);
+    return () => {
+      window.removeEventListener("mousewheel", handleWheel);
+      // window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("scroll", handleScrollOnlyMobile);
+    };
   });
 
   return (
@@ -43,7 +94,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar open={open} setOpen={setOpen} />
+      <Navbar open={open} setOpen={setOpen} scrollToParam={scrollToParam} />
       <main
         id="main"
         className="
@@ -52,26 +103,23 @@ export default function Home() {
         py-20 px-6
       "
       >
-        <section className="text-center h-[calc(100vh-80px)]">
+        <section
+          id="hero"
+          className="min-h-[calc(100vh-80px)] w-screen scroll-mt-0 text-center"
+        >
           <Hero />
         </section>
 
-        <section id="about" className="min-h-screen scroll-mt-20 text-center">
-          <h1 className="text-white text-3xl font-bold">About</h1>
-          <p className="text-white text-2xl font-bold mt-5">
-            Ullamco dolore elit fugiat nisi reprehenderit sit ullamco amet
-            laboris enim culpa. Velit laboris ullamco esse sunt commodo commodo
-            proident. Anim ullamco commodo sunt cupidatat anim id nisi non
-            laboris id. Enim aliqua deserunt velit elit. Amet irure qui in enim
-            amet enim reprehenderit ad aliqua esse pariatur laboris est ea.
-            Consectetur laboris sint eiusmod dolore do exercitation. Nulla
-            ullamco ex irure enim irure.
-          </p>
+        <section
+          id="skills"
+          className="min-h-[calc(100vh-80px)] w-screen scroll-mt-20 text-center my-10"
+        >
+          <Skills />
         </section>
 
         <section
           id="projects"
-          className="min-h-screen scroll-mt-20 text-center"
+          className="h-[calc(100vh-80px)] scroll-mt-20 text-center"
         >
           <h1 className="text-white text-3xl font-bold">Projects</h1>
         </section>
@@ -80,64 +128,68 @@ export default function Home() {
           <h1 className="text-white text-3xl font-bold">Contact</h1>
         </section>
 
-        <div className={"fixed justify-center bottom-5 right-1/2 left-1/2"}>
-          <div
-            className={`bg-neutral-950 p-2 w-10 h-10 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg rounded-full flex items-center justify-center md:cursor-pointer ${
-              isArrowVisible ? "animate-bounce" : "animate-fadeOut"
-            }`}
-            onClick={() => {
-              scrollToSection("about");
-            }}
-          >
-            <svg
-              className="w-6 h-6 text-violet-700"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2.5"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-          </div>
-        </div>
-
-        <div className={"fixed justify-center bottom-5 right-5"}>
-          <div
-            className={`animate-bounce bg-neutral-950 p-2 w-10 h-10 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg rounded-full flex items-center justify-center md:cursor-pointer ${
-              topArrowVisible ? "animate-fadeIn" : "invisible"
-            }`}
-            onClick={() => {
-              scrollTo(0, 0);
-              setOpen(false);
-            }}
-          >
-            <svg
-              className="w-6 h-6 text-violet-700"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2.5"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                d="M15.5 16.5L12 13L8.5 16.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />{" "}
-              <path
-                d="M15.5 10.5L12 7L8.5 10.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-        </div>
+        <ScrollArrows
+          isArrowVisible={isArrowVisible}
+          topArrowVisible={topArrowVisible}
+          setOpen={setOpen}
+          scrollToParam={scrollToParam}
+        />
       </main>
     </>
   );
+
+  function scrollToParam(target) {
+    switch (target) {
+      case "next":
+        //scroll down
+        if (currentSection < sections.length - 1) {
+          scrolling.current = true;
+          setCurrentSection(currentSection + 1);
+          scrollToSection(sections[currentSection + 1]);
+        }
+        break;
+      case "prev":
+        //scroll up
+        if (currentSection > 0) {
+          scrolling.current = true;
+          setCurrentSection(currentSection - 1);
+          scrollToSection(sections[currentSection - 1]);
+        }
+        break;
+      case "top":
+        if (noScroll.current) {
+          break;
+        }
+        scrolling.current = true;
+        setCurrentSection(0);
+        scrollToSection(sections[0]);
+
+        if (scrolling.current) {
+          scrollTimeout.current = setTimeout(() => {
+            scrolling.current = false;
+            noScroll.current = false;
+          }, 800);
+          noScroll.current = true;
+        }
+
+        break;
+      default:
+        if (noScroll.current) {
+          break;
+        }
+        scrolling.current = true;
+        setCurrentSection(sections.indexOf(target));
+        scrollToSection(target);
+
+        if (scrolling.current) {
+          scrollTimeout.current = setTimeout(() => {
+            scrolling.current = false;
+            noScroll.current = false;
+          }, 800);
+          noScroll.current = true;
+        }
+
+        break;
+    }
+  }
 }

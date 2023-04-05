@@ -28,14 +28,15 @@ const Skills = () => {
         <h2 className="text-3xl font-bold text-gray-100 mb-4">Skills</h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {skills.map((skill) => (
-            <div
-              key={skill.name}
-              className={`p-6 rounded-lg text-center border-solid border-2 border-black hover:-translate-y-3 hover:shadow-violet-700 shadow-lg ${skill.bg}`}
-            >
-              <h3 className="text-lg font-semibold text-gray-100 mb-2">
-                {skill.name}
-              </h3>
-              <p className="text-gray-400">{skill.level}</p>
+            <div key={skill.name} className="group">
+              <div
+                className={`p-6 rounded-lg text-center border-solid border-2 border-black group-hover:animate-bounce group-hover:shadow-violet-700 shadow-lg ${skill.bg}`}
+              >
+                <h3 className="text-lg font-semibold text-gray-100 mb-2">
+                  {skill.name}
+                </h3>
+                <p className="text-gray-400">{skill.level}</p>
+              </div>
             </div>
           ))}
         </div>

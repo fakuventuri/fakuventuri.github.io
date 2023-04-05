@@ -1,6 +1,6 @@
 import React from "react";
 
-function MobileNav({ open, setOpen, scrollToParam }) {
+function MobileNav({ open, setOpen, scrollToParam, currentSection }) {
   return (
     <div
       className={`absolute top-20 left-0 h-screen w-2/3 bg-black/95 transform ${
@@ -40,10 +40,20 @@ function MobileNav({ open, setOpen, scrollToParam }) {
   );
 }
 
-export default function Navbar({ open, setOpen, scrollToParam }) {
+export default function Navbar({
+  open,
+  setOpen,
+  scrollToParam,
+  currentSection,
+}) {
   return (
     <nav className="fixed top-0 left-0 right-0 flex filter bg-gradient-to-b from-neutral-950 backdrop-blur-lg px-4 h-20 items-center z-50">
-      <MobileNav open={open} setOpen={setOpen} scrollToParam={scrollToParam} />
+      <MobileNav
+        open={open}
+        setOpen={setOpen}
+        scrollToParam={scrollToParam}
+        currentSection={currentSection}
+      />
       <div className="w-full flex items-center justify-start">
         <a
           className="text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer"
@@ -80,9 +90,14 @@ export default function Navbar({ open, setOpen, scrollToParam }) {
           />
         </div>
 
-        <div className="hidden md:flex md:space-x-6">
+        <div className="hidden md:flex md:space-x-6 pr-4">
           <a
-            className="text-xl text-neutral-300 md:cursor-pointer"
+            className={`text-xl text-neutral-300 cursor-pointer h-20 text-center leading-[4]
+             transition ease-in-out delay-150 duration-500 ${
+               currentSection === 1
+                 ? "font-semibold text-white border-b-4 border-violet-700"
+                 : "border-transparent"
+             }`}
             onClick={() => {
               scrollToParam("skills");
             }}
@@ -90,7 +105,12 @@ export default function Navbar({ open, setOpen, scrollToParam }) {
             Skills
           </a>
           <a
-            className="text-xl text-neutral-300 md:cursor-pointer"
+            className={`text-xl text-neutral-300 cursor-pointer h-20 text-center leading-[4]
+             transition ease-in-out delay-150 duration-500 ${
+               currentSection === 2
+                 ? "font-semibold text-white border-b-4 border-violet-700"
+                 : "border-transparent"
+             }`}
             onClick={() => {
               scrollToParam("projects");
             }}
@@ -98,7 +118,12 @@ export default function Navbar({ open, setOpen, scrollToParam }) {
             Projects
           </a>
           <a
-            className="text-xl text-neutral-300 md:cursor-pointer pr-4"
+            className={`text-xl text-neutral-300 cursor-pointer h-20 text-center leading-[4]
+             transition ease-in-out delay-150 duration-500 ${
+               currentSection === 3
+                 ? "font-semibold text-white border-b-4 border-violet-700"
+                 : "border-transparent"
+             }`}
             onClick={() => {
               scrollToParam("contact");
             }}

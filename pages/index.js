@@ -117,8 +117,14 @@ export default function Home() {
 
         <section
           id="skills"
-          className="min-h-[calc(100vh-80px)] w-screen scroll-mt-20 text-center mb-10"
+          className="min-h-[calc(100vh-80px)] w-screen scroll-mt-20 text-center mb-10 flex flex-col"
         >
+          <h1
+            className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white self-center mb-5
+          uppercase box-border border-violet-700 border-l-4 border-solid"
+          >
+            &nbsp;Skills&nbsp;
+          </h1>
           <Skills />
         </section>
 
@@ -126,11 +132,15 @@ export default function Home() {
           id="projects"
           className="h-[calc(100vh-80px)] scroll-mt-20 text-center"
         >
-          <h1 className="text-white text-3xl font-bold">Projects</h1>
+          <h1 className="tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white uppercase box-border border-violet-700 border-l-4 border-solid">
+            &nbsp;Projects&nbsp;
+          </h1>
         </section>
 
         <section id="contact" className="min-h-screen scroll-mt-20 text-center">
-          <h1 className="text-white text-3xl font-bold">Contact</h1>
+          <h1 className="tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white uppercase box-border border-violet-700 border-l-4 border-solid">
+            &nbsp;Contact&nbsp;
+          </h1>
         </section>
 
         <ScrollArrows

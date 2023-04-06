@@ -5,11 +5,41 @@ import Head from "next/head";
 import { scrollToSection } from "@/utils/tools.js";
 
 import Navbar from "@/components/Navbar";
-import ScrollArrows from "@/components/ScrollArrows";
+
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 
+import ScrollArrows from "@/components/ScrollArrows";
+import ProjectCarousel from "@/components/ProjectCarousel";
+
 const sections = ["main", "skills", "projects", "contact"];
+
+const projects = [
+  {
+    id: 1,
+    title: "Project 1",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/project1.jpg",
+    imageWidth: 320,
+    imageHeight: 320,
+  },
+  {
+    id: 2,
+    title: "Project 2",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/project1.jpg",
+    imageWidth: 320,
+    imageHeight: 320,
+  },
+  {
+    id: 3,
+    title: "Project 3",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image: "/project1.jpg",
+    imageWidth: 320,
+    imageHeight: 320,
+  },
+];
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -94,7 +124,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar open={open} setOpen={setOpen} scrollToParam={scrollToParam} />
+      <Navbar
+        open={open}
+        setOpen={setOpen}
+        scrollToParam={scrollToParam}
+        currentSection={currentSection}
+      />
       <main
         id="main"
         className="
@@ -112,20 +147,31 @@ export default function Home() {
 
         <section
           id="skills"
-          className="min-h-[calc(100vh-80px)] w-screen scroll-mt-20 text-center mb-10"
+          className="min-h-[calc(100vh-80px)] w-screen scroll-mt-20 text-center mb-10 flex flex-col"
         >
+          <h1
+            className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white self-center mb-5
+          uppercase box-border border-violet-700 border-l-4 border-solid"
+          >
+            &nbsp;Skills&nbsp;
+          </h1>
           <Skills />
         </section>
 
         <section
           id="projects"
-          className="h-[calc(100vh-80px)] scroll-mt-20 text-center"
+          className="h-[calc(100vh-80px)] scroll-mt-20 text-center overflow-clip"
         >
-          <h1 className="text-white text-3xl font-bold">Projects</h1>
+          <h1 className="tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white uppercase box-border border-violet-700 border-l-4 border-solid">
+            &nbsp;Projects&nbsp;
+          </h1>
+          {/* <ProjectCarousel projects={projects} /> */}
         </section>
 
         <section id="contact" className="min-h-screen scroll-mt-20 text-center">
-          <h1 className="text-white text-3xl font-bold">Contact</h1>
+          <h1 className="tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white uppercase box-border border-violet-700 border-l-4 border-solid">
+            &nbsp;Contact&nbsp;
+          </h1>
         </section>
 
         <ScrollArrows

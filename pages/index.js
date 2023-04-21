@@ -5,41 +5,11 @@ import Head from "next/head";
 import { scrollToSection } from "@/utils/tools.js";
 
 import Navbar from "@/components/Navbar";
-
+import ScrollArrows from "@/components/ScrollArrows";
 import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 
-import ScrollArrows from "@/components/ScrollArrows";
-import ProjectCarousel from "@/components/ProjectCarousel";
-
 const sections = ["main", "skills", "projects", "contact"];
-
-const projects = [
-  {
-    id: 1,
-    title: "Project 1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    image: "/project1.jpg",
-    imageWidth: 320,
-    imageHeight: 320,
-  },
-  {
-    id: 2,
-    title: "Project 2",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    image: "/project1.jpg",
-    imageWidth: 320,
-    imageHeight: 320,
-  },
-  {
-    id: 3,
-    title: "Project 3",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    image: "/project1.jpg",
-    imageWidth: 320,
-    imageHeight: 320,
-  },
-];
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -149,10 +119,7 @@ export default function Home() {
           id="skills"
           className="min-h-[calc(100vh-80px)] w-screen scroll-mt-20 text-center mb-10 flex flex-col"
         >
-          <h1
-            className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white self-center mb-5
-          uppercase box-border border-violet-700 border-l-4 border-solid"
-          >
+          <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white self-center mb-5 uppercase">
             &nbsp;Skills&nbsp;
           </h1>
           <Skills />
@@ -160,16 +127,15 @@ export default function Home() {
 
         <section
           id="projects"
-          className="h-[calc(100vh-80px)] scroll-mt-20 text-center overflow-clip"
+          className="h-[calc(100vh-80px)] scroll-mt-20 text-center"
         >
-          <h1 className="tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white uppercase box-border border-violet-700 border-l-4 border-solid">
+          <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white self-center mb-5 uppercase">
             &nbsp;Projects&nbsp;
           </h1>
-          {/* <ProjectCarousel projects={projects} /> */}
         </section>
 
         <section id="contact" className="min-h-screen scroll-mt-20 text-center">
-          <h1 className="tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white uppercase box-border border-violet-700 border-l-4 border-solid">
+          <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white self-center mb-5 uppercase">
             &nbsp;Contact&nbsp;
           </h1>
         </section>

@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "eslint": "8.37.0",
-    "eslint-config-next": "13.2.4",
-    "next": "13.2.4",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.3",
+    "next": "13.4.3",
     "next-reveal": "^1.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"

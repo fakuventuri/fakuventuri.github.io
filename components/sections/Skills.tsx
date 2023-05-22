@@ -1,41 +1,60 @@
 import React from "react";
+import SkillProgressBar from "../SkillProgressBar";
 
 export default function Skills() {
   const skills = [
-    { name: "React", level: "Advanced", bg: "bg-neutral-700" },
-    { name: "React Native", level: "Advanced", bg: "bg-neutral-700" },
-    { name: "NextJS", level: "Advanced", bg: "bg-neutral-700" },
-    { name: "Node.js", level: "Advanced", bg: "bg-neutral-700" },
-    { name: "JavaScript", level: "Advanced", bg: "bg-neutral-700" },
-    { name: "HTML/CSS", level: "Advanced", bg: "bg-neutral-700" },
-    { name: "Java", level: "Advanced", bg: "bg-neutral-700" },
-    { name: "Unity", level: "Advanced", bg: "bg-neutral-700" },
-    { name: "C#", level: "Intermediate", bg: "bg-neutral-800" },
-    { name: "Angular", level: "Intermediate", bg: "bg-neutral-800" },
-    { name: "NoSQL", level: "Intermediate", bg: "bg-neutral-800" },
-    { name: "SQL", level: "Intermediate", bg: "bg-neutral-800" },
-    { name: "ExpressJS", level: "Intermediate", bg: "bg-neutral-800" },
-    { name: "Firebase", level: "Intermediate", bg: "bg-neutral-800" },
-    { name: "Python", level: "Intermediate", bg: "bg-neutral-800" },
-    { name: "Git", level: "Intermediate", bg: "bg-neutral-800" },
-    { name: "TailwindCSS", level: "Intermediate", bg: "bg-neutral-800" },
-    { name: "Redux", level: "Beginner", bg: "bg-neutral-900" },
+    { name: "React", level: 95, animationDelay: "[animation-delay:3400ms]" },
+    {
+      name: "React Native",
+      level: 80,
+      animationDelay: "[animation-delay:3500ms]",
+    },
+    { name: "NextJS", level: 90, animationDelay: "[animation-delay:3600ms]" },
+    { name: "Node.js", level: 85, animationDelay: "[animation-delay:3700ms]" },
+    {
+      name: "JavaScript",
+      level: 90,
+      animationDelay: "[animation-delay:3800ms]",
+    },
+    { name: "HTML/CSS", level: 80, animationDelay: "[animation-delay:3900ms]" },
+    { name: "Java", level: 80, animationDelay: "[animation-delay:3100ms]" },
+    { name: "Unity", level: 75, animationDelay: "[animation-delay:3200ms]" },
+    { name: "C#", level: 50, animationDelay: "[animation-delay:3300ms]" },
+    { name: "Angular", level: 45, animationDelay: "[animation-delay:3400ms]" },
+    { name: "NoSQL", level: 60, animationDelay: "[animation-delay:3500ms]" },
+    { name: "SQL", level: 60, animationDelay: "[animation-delay:3600ms]" },
+    {
+      name: "ExpressJS",
+      level: 60,
+      animationDelay: "[animation-delay:3700ms]",
+    },
+    { name: "Firebase", level: 50, animationDelay: "[animation-delay:3800ms]" },
+    { name: "Python", level: 70, animationDelay: "[animation-delay:3900ms]" },
+    { name: "Redux", level: 15, animationDelay: "[animation-delay:3100ms]" },
   ];
+
+  function compareSkillsToOrderByLevel(a: any, b: any) {
+    if (a.level < b.level) {
+      return 1;
+    }
+    if (a.level > b.level) {
+      return -1;
+    }
+    return 0;
+  }
 
   return (
     <div className="w-full h-fit px-4 text-center sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl lg:text-center">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {skills.map((skill) => (
-            <div key={skill.name} className="group">
-              <div
-                className={`p-6 rounded-lg text-center border-solid border-2 border-black group-hover:animate-bounce group-hover:shadow-violet-700 shadow-lg ${skill.bg}`}
-              >
-                <h3 className="mb-2 text-lg font-semibold text-gray-100">
-                  {skill.name}
-                </h3>
-                <p className="text-gray-400">{skill.level}</p>
-              </div>
+        <div className="flex flex-col">
+          {skills.sort(compareSkillsToOrderByLevel).map((skill) => (
+            <div key={skill.name} className="">
+              <SkillProgressBar
+                name={skill.name}
+                level={skill.level}
+                bgColor="bg-violet-800"
+                animationDelay={skill.animationDelay}
+              />
             </div>
           ))}
         </div>

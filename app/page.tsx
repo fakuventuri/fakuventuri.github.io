@@ -13,12 +13,22 @@ export default function Home() {
 
       <section
         id="skills"
-        className="flex flex-col justify-center items-center w-screen h-screen pt-20 scroll-mt-0"
+        className="flex flex-col justify-start items-center w-screen h-fit pt-20 scroll-mt-0"
       >
-        <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white mb-5 uppercase">
-          &nbsp;Skills&nbsp;
+        <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white mb-10 mt-5 uppercase">
+          Skills
         </h1>
         <Skills />
+      </section>
+
+      <section
+        id="projects"
+        className="flex flex-col justify-start items-center w-screen h-screen pt-20 scroll-mt-0"
+      >
+        <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white mb-10 mt-5 uppercase">
+          Projects
+        </h1>
+        {/* <Skills /> */}
       </section>
     </main>
   );

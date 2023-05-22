@@ -3,8 +3,9 @@ import { Inter } from "next/font/google";
 
 // Components
 import ScrollIndicator from "@/components/ScrollIndicator";
-import SocialButtons from "@/components/SocialButtons";
+// import SocialButtons from "@/components/SocialButtons";
 import Navbar from "@/components/Navbar";
+import ScrollArrows from "@/components/ScrollArrows";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +27,7 @@ export default function RootLayout({
         <Navbar />
         <ScrollIndicator />
 
-        <div className="fixed z-20 bottom-4 right-4">
-          <SocialButtons />
-        </div>
+        <ScrollArrows />
 
         {children}
       </body>

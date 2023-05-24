@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function scrollToSection(section: string) {
   var targetSection = document.getElementById(section);
@@ -51,6 +51,15 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [open]);
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-neutral-950 backdrop-blur-md">
       <MobileNav open={open} setOpen={setOpen} />

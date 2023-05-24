@@ -33,31 +33,10 @@ module.exports = {
             opacity: "0",
           },
         },
-        "progress-bar": {
-          "0%": {
-            width: "0%",
-          },
-          "100%": {
-            width: "100%",
-          },
-        },
-        "progress-bar-idle": {
-          "0%": {
-            width: "100%",
-          },
-          "50%": {
-            width: "99.5%",
-          },
-          "100%": {
-            width: "100%",
-          },
-        },
       },
       animation: {
         "slide-up": "slide-up 0.5s forwards",
         "slide-down": "slide-down 0.5s forwards",
-        "progress-bar": "progress-bar 3s ease-out forwards",
-        "progress-bar-idle": "progress-bar-idle 1s infinite ease-in-out",
       },
     },
   },

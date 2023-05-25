@@ -9,6 +9,23 @@ function scrollToSection(section: string) {
   }
 }
 
+function findLeastAbsoluteValue(
+  sections: NodeListOf<HTMLElement>
+): HTMLElement {
+  let leastValue = Number.MAX_VALUE;
+  let leastObject: HTMLElement = sections[0];
+
+  sections.forEach((section) => {
+    const value = Math.abs(section.getBoundingClientRect().top);
+    if (value < leastValue) {
+      leastValue = value;
+      leastObject = section;
+    }
+  });
+
+  return leastObject;
+}
+
 function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
   return (
     <div
@@ -59,6 +76,37 @@ export default function Navbar() {
       document.body.style.overflow = "unset";
     }
   }, [open]);
+
+  const handleScroll = () => {
+    const Sections = document.querySelectorAll("section");
+
+    const leastSection = findLeastAbsoluteValue(
+      Sections as NodeListOf<HTMLElement>
+    );
+
+    const navLinks = document.querySelectorAll("#navLink");
+
+    navLinks.forEach((navLink) => {
+      if (navLink.innerHTML.toLowerCase() === leastSection.id) {
+        navLink.classList.add("font-semibold");
+        navLink.classList.add("text-white");
+        navLink.classList.add("border-b-4");
+        navLink.classList.add("border-violet-700");
+        navLink.classList.remove("border-transparent");
+      } else {
+        navLink.classList.remove("font-semibold");
+        navLink.classList.remove("text-white");
+        navLink.classList.remove("border-b-4");
+        navLink.classList.remove("border-violet-700");
+        navLink.classList.add("border-transparent");
+      }
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-neutral-950 backdrop-blur-md">
@@ -113,6 +161,7 @@ export default function Navbar() {
             onClick={() => {
               scrollToSection("skills");
             }}
+            id="navLink"
           >
             Skills
           </a>
@@ -127,6 +176,7 @@ export default function Navbar() {
             onClick={() => {
               scrollToSection("projects");
             }}
+            id="navLink"
           >
             Projects
           </a>
@@ -141,6 +191,7 @@ export default function Navbar() {
             onClick={() => {
               scrollToSection("contact");
             }}
+            id="navLink"
           >
             Contact
           </a>

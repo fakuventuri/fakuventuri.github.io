@@ -9,21 +9,17 @@ function scrollToSection(section: string) {
   }
 }
 
-function findLeastAbsoluteValue(
-  sections: NodeListOf<HTMLElement>
-): HTMLElement {
-  let leastValue = Number.MAX_VALUE;
-  let leastObject: HTMLElement = sections[0];
+function findCurrentSection(sections: NodeListOf<HTMLElement>) {
+  const scrollPosition = window.scrollY + 100;
+  let currentSection = sections[0];
 
   sections.forEach((section) => {
-    const value = Math.abs(section.getBoundingClientRect().top);
-    if (value < leastValue) {
-      leastValue = value;
-      leastObject = section;
+    if (section.offsetTop <= scrollPosition) {
+      currentSection = section;
     }
   });
 
-  return leastObject;
+  return currentSection;
 }
 
 function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
@@ -80,14 +76,14 @@ export default function Navbar() {
   const handleScroll = () => {
     const Sections = document.querySelectorAll("section");
 
-    const leastSection = findLeastAbsoluteValue(
+    const currentSection = findCurrentSection(
       Sections as NodeListOf<HTMLElement>
     );
 
     const navLinks = document.querySelectorAll("#navLink");
 
     navLinks.forEach((navLink) => {
-      if (navLink.innerHTML.toLowerCase() === leastSection.id) {
+      if (navLink.innerHTML.toLowerCase() === currentSection.id) {
         navLink.classList.add("font-semibold");
         navLink.classList.add("text-white");
         navLink.classList.add("border-b-4");
@@ -101,6 +97,18 @@ export default function Navbar() {
         navLink.classList.add("border-transparent");
       }
     });
+
+    // If the current section is the hero section, do something fancy with the #mainLink
+    const mainLink = document.querySelector("#mainLink");
+    if (currentSection.id === "hero") {
+      mainLink?.classList.add("text-violet-700");
+      mainLink?.classList.add("font-semibold");
+      mainLink?.classList.remove("text-white");
+    } else {
+      mainLink?.classList.remove("text-violet-700");
+      mainLink?.classList.remove("font-semibold");
+      mainLink?.classList.add("text-white");
+    }
   };
 
   useEffect(() => {
@@ -118,6 +126,7 @@ export default function Navbar() {
             scrollToSection("main");
             setOpen(false);
           }}
+          id="mainLink"
         >
           Facundo Venturi
         </a>
@@ -151,13 +160,8 @@ export default function Navbar() {
 
         <div className="hidden pr-4 md:flex md:space-x-6">
           <a
-            className={`text-xl text-neutral-300 cursor-pointer h-20 text-center leading-[4]
-             transition ease-in-out delay-150 duration-500 ${
-               //    currentSection === 1
-               false
-                 ? "font-semibold text-white border-b-4 border-violet-700"
-                 : "border-transparent"
-             }`}
+            className="h-20 text-xl text-center cursor-pointer text-neutral-300 
+            leading-[4]"
             onClick={() => {
               scrollToSection("skills");
             }}
@@ -166,13 +170,7 @@ export default function Navbar() {
             Skills
           </a>
           <a
-            className={`text-xl text-neutral-300 cursor-pointer h-20 text-center leading-[4]
-             transition ease-in-out delay-150 duration-500 ${
-               //    currentSection === 2
-               false
-                 ? "font-semibold text-white border-b-4 border-violet-700"
-                 : "border-transparent"
-             }`}
+            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4]"
             onClick={() => {
               scrollToSection("projects");
             }}
@@ -181,13 +179,7 @@ export default function Navbar() {
             Projects
           </a>
           <a
-            className={`text-xl text-neutral-300 cursor-pointer h-20 text-center leading-[4]
-             transition ease-in-out delay-150 duration-500 ${
-               //    currentSection === 3
-               false
-                 ? "font-semibold text-white border-b-4 border-violet-700"
-                 : "border-transparent"
-             }`}
+            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4]"
             onClick={() => {
               scrollToSection("contact");
             }}

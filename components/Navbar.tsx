@@ -64,6 +64,7 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [activeMainLink, setActiveMainLink] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -106,6 +107,7 @@ export default function Navbar() {
       mainLink?.classList.add("animate-slide-down");
       // mainLink?.classList.add("font-semibold");
     } else {
+      setActiveMainLink(true);
       // mainLink?.classList.remove("font-semibold");
       mainLink?.classList.remove("animate-slide-down");
       mainLink?.classList.add("animate-slide-up");
@@ -114,6 +116,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   });
@@ -123,7 +126,9 @@ export default function Navbar() {
       <MobileNav open={open} setOpen={setOpen} />
       <div className="flex items-center justify-start w-full">
         <a
-          className="text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer"
+          className={`text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer ${
+            activeMainLink ? "animate-slide-down" : "hidden"
+          }`}
           onClick={() => {
             scrollToSection("main");
             setOpen(false);

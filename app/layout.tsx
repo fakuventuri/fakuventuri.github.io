@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className="select-none scroll-smooth">
+    <html lang="es" className="select-none scroll-smooth overflow-x-hidden">
       <body className={inter.className + " min-h-screen"}>
         <Navbar />
         <ScrollIndicator />

@@ -17,20 +17,24 @@ module.exports = {
           "0%": {
             transform: "translateY(101%)",
             opacity: "0",
+            visibility: "hidden",
           },
           "100%": {
             transform: "translateY(0%)",
             opacity: "1",
+            visibility: "visible",
           },
         },
         "slide-down": {
           "0%": {
             transform: "translateY(0%)",
             opacity: "1",
+            visibility: "visible",
           },
           "100%": {
             transform: "translateY(101%)",
             opacity: "0",
+            visibility: "hidden",
           },
         },
       },

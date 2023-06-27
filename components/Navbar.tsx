@@ -101,12 +101,14 @@ export default function Navbar() {
     // If the current section is the hero section, do something fancy with the #mainLink
     const mainLink = document.querySelector("#mainLink");
     if (currentSection.id === "hero") {
-      mainLink?.classList.add("invisible");
-      mainLink?.classList.add("font-semibold");
       mainLink?.classList.remove("text-white");
+      mainLink?.classList.remove("animate-slide-up");
+      mainLink?.classList.add("animate-slide-down");
+      // mainLink?.classList.add("font-semibold");
     } else {
-      mainLink?.classList.remove("invisible");
-      mainLink?.classList.remove("font-semibold");
+      // mainLink?.classList.remove("font-semibold");
+      mainLink?.classList.remove("animate-slide-down");
+      mainLink?.classList.add("animate-slide-up");
       mainLink?.classList.add("text-white");
     }
   };
@@ -121,7 +123,7 @@ export default function Navbar() {
       <MobileNav open={open} setOpen={setOpen} />
       <div className="flex items-center justify-start w-full">
         <a
-          className="text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer invisible"
+          className="text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer"
           onClick={() => {
             scrollToSection("main");
             setOpen(false);

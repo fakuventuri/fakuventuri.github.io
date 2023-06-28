@@ -27,7 +27,7 @@ export default function Skills() {
           {skills.map((skill, index) => (
             <div key={skill.name} className="group">
               <div
-                className="flex flex-col items-center justify-center p-6 text-center transition-all duration-1000 ease-out border-2 border-black border-solid rounded-lg shadow-lg group-hover:-translate-y-4 group-hover:shadow-violet-700 group-hover:duration-100 h-40"
+                className="flex flex-col items-center justify-center h-40 p-6 text-center transition-all duration-1000 ease-out border-2 border-black border-solid rounded-lg shadow-lg group-hover:-translate-y-4 group-hover:shadow-violet-700 group-hover:duration-100"
                 // background color change with index
                 style={{
                   backgroundColor: `rgba(${100 - index * 5}, ${

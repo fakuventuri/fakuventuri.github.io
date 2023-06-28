@@ -24,8 +24,8 @@ export default function RootLayout({
   return (
     <html lang="es" className="select-none scroll-smooth overflow-x-hidden">
       <body className={inter.className + " min-h-screen"}>
-        <Navbar />
         <ScrollIndicator />
+        <Navbar />
 
         <ScrollArrows />
 

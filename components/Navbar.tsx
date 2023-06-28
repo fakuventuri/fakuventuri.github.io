@@ -31,29 +31,32 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
     >
       <div className="flex flex-col ml-4">
         <a
-          className="my-4 text-xl font-medium text-neutral-300"
+          className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
             scrollToSection("skills");
             setOpen(false);
           }}
+          id="navLink"
         >
           Skills
         </a>
         <a
-          className="my-4 text-xl font-medium text-neutral-300"
+          className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
             scrollToSection("projects");
             setOpen(false);
           }}
+          id="navLink"
         >
           Projects
         </a>
         <a
-          className="my-4 text-xl font-medium text-neutral-300"
+          className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
             scrollToSection("contact");
             setOpen(false);
           }}
+          id="navLink"
         >
           Contact
         </a>
@@ -85,30 +88,29 @@ export default function Navbar() {
 
     navLinks.forEach((navLink) => {
       if (navLink.innerHTML.toLowerCase() === currentSection.id) {
-        navLink.classList.add("font-semibold");
-        navLink.classList.add("text-white");
-        navLink.classList.add("border-b-4");
-        navLink.classList.add("border-violet-700");
         navLink.classList.remove("border-transparent");
+        navLink.classList.add(
+          "font-semibold",
+          "text-white",
+          "border-violet-700"
+        );
       } else {
-        navLink.classList.remove("font-semibold");
-        navLink.classList.remove("text-white");
-        navLink.classList.remove("border-b-4");
-        navLink.classList.remove("border-violet-700");
+        navLink.classList.remove(
+          "font-semibold",
+          "text-white",
+          "border-violet-700"
+        );
         navLink.classList.add("border-transparent");
       }
     });
 
-    // If the current section is the hero section, do something fancy with the #mainLink
     const mainLink = document.querySelector("#mainLink");
     if (currentSection.id === "hero") {
       mainLink?.classList.remove("text-white");
       mainLink?.classList.remove("animate-slide-up");
       mainLink?.classList.add("animate-slide-down");
-      // mainLink?.classList.add("font-semibold");
     } else {
       setActiveMainLink(true);
-      // mainLink?.classList.remove("font-semibold");
       mainLink?.classList.remove("animate-slide-down");
       mainLink?.classList.add("animate-slide-up");
       mainLink?.classList.add("text-white");
@@ -122,11 +124,12 @@ export default function Navbar() {
   });
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-neutral-950 backdrop-blur-md">
+    // from-neutral-950
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-black backdrop-blur-md">
       <MobileNav open={open} setOpen={setOpen} />
       <div className="flex items-center justify-start w-full">
         <a
-          className={`text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer ${
+          className={`text-xl sm:text-2xl md:text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer ${
             activeMainLink ? "animate-slide-down" : "hidden"
           }`}
           onClick={() => {
@@ -168,7 +171,7 @@ export default function Navbar() {
         <div className="hidden pr-4 md:flex md:space-x-6">
           <a
             className="h-20 text-xl text-center cursor-pointer text-neutral-300 
-            leading-[4]"
+            leading-[4] border-b-4 border-transparent"
             onClick={() => {
               scrollToSection("skills");
             }}
@@ -177,7 +180,7 @@ export default function Navbar() {
             Skills
           </a>
           <a
-            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4]"
+            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
             onClick={() => {
               scrollToSection("projects");
             }}
@@ -186,7 +189,7 @@ export default function Navbar() {
             Projects
           </a>
           <a
-            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4]"
+            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
             onClick={() => {
               scrollToSection("contact");
             }}

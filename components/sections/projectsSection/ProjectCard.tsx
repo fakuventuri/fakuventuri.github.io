@@ -1,18 +1,15 @@
 "use client";
 
+import Link from "next/link";
+
 import Project from "@/types/project";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <div
+    <Link
       className="group cursor-pointer"
-      onClick={() => {
-        if (project.link.includes(".")) {
-          window.open(project.link, "_blank");
-        } else {
-          window.open(project.link, "_self");
-        }
-      }}
+      href={project.link}
+      target={project.link.includes(".") ? "_blank" : "_self"}
     >
       <div className="flex flex-col items-center justify-between h-full p-6 text-center transition-all duration-1000 ease-out border-2 border-black border-solid rounded-lg shadow-lg group-hover:-translate-y-4 group-hover:shadow-violet-700 group-hover:duration-100 bg-violet-950 hover:bg-violet-900 hover:duration-100">
         <div>
@@ -34,6 +31,6 @@ export default function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

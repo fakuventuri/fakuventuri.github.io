@@ -40,6 +40,7 @@ export default function ScrollArrows() {
           }`}
           onClick={() => {
             scrollToSection("skills");
+            window.location.hash = "skills";
           }}
         >
           <svg
@@ -69,6 +70,7 @@ export default function ScrollArrows() {
           }`}
           onClick={() => {
             scrollToSection("main");
+            window.location.hash = "";
           }}
         >
           <svg

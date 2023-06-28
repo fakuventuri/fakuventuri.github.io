@@ -166,6 +166,7 @@ export default function Navbar() {
               setOpen(false);
             }}
             id="mainLink"
+            tabIndex={0}
           >
             Facundo Venturi
           </a>
@@ -177,6 +178,7 @@ export default function Navbar() {
               onClick={() => {
                 setOpen(!open);
               }}
+              tabIndex={0}
             >
               {/* hamburger button */}
               <span
@@ -205,6 +207,7 @@ export default function Navbar() {
                 scrollToSection("skills", actualPath);
               }}
               id="navLink"
+              tabIndex={0}
             >
               Skills
             </a>
@@ -214,6 +217,7 @@ export default function Navbar() {
                 scrollToSection("projects", actualPath);
               }}
               id="navLink"
+              tabIndex={0}
             >
               Projects
             </a>
@@ -223,6 +227,7 @@ export default function Navbar() {
                 scrollToSection("contact", actualPath);
               }}
               id="navLink"
+              tabIndex={0}
             >
               Contact
             </a>

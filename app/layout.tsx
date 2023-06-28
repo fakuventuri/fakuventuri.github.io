@@ -2,10 +2,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 
 // Components
-import ScrollIndicator from "@/components/ScrollIndicator";
 // import SocialButtons from "@/components/SocialButtons";
 import Navbar from "@/components/Navbar";
-import ScrollArrows from "@/components/ScrollArrows";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,13 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className="select-none scroll-smooth overflow-x-hidden">
+    <html
+      lang="es"
+      className="select-none scroll-smooth overflow-x-hidden hideScrollbar"
+    >
       <body className={inter.className + " min-h-screen"}>
         <Navbar />
-        <ScrollIndicator />
-
-        <ScrollArrows />
-
         {children}
       </body>
     </html>

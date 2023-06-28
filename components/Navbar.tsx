@@ -1,12 +1,32 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-function scrollToSection(section: string) {
-  var targetSection = document.getElementById(section);
-  if (targetSection) {
-    targetSection.scrollIntoView({ behavior: "smooth" });
+import ScrollIndicator from "@/components/ScrollIndicator";
+
+function scrollToSection(section: string, actualPath: string) {
+  let hash = "";
+
+  if (section !== "main") {
+    hash = section;
   }
+
+  if (actualPath !== "/") {
+    window.location.href = "/#" + hash;
+    return;
+  }
+
+  if (window.location.hash.toString().replace("#", "") === hash) {
+    console.log(window.location.hash);
+    var targetSection = document.getElementById(section);
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: "smooth" });
+    }
+    return;
+  }
+
+  window.location.hash = hash;
 }
 
 function findCurrentSection(sections: NodeListOf<HTMLElement>) {
@@ -22,7 +42,15 @@ function findCurrentSection(sections: NodeListOf<HTMLElement>) {
   return currentSection;
 }
 
-function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
+function MobileNav({
+  open,
+  setOpen,
+  actualPath,
+}: {
+  open: boolean;
+  setOpen: Function;
+  actualPath: string;
+}) {
   return (
     <div
       className={`fixed top-20 left-0 h-screen w-full overflow-hidden bg-black/95 sm:hidden transform ${
@@ -31,29 +59,32 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
     >
       <div className="flex flex-col ml-4">
         <a
-          className="my-4 text-xl font-medium text-neutral-300"
+          className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
-            scrollToSection("skills");
+            scrollToSection("skills", actualPath);
             setOpen(false);
           }}
+          id="navLink"
         >
           Skills
         </a>
         <a
-          className="my-4 text-xl font-medium text-neutral-300"
+          className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
-            scrollToSection("projects");
+            scrollToSection("projects", actualPath);
             setOpen(false);
           }}
+          id="navLink"
         >
           Projects
         </a>
         <a
-          className="my-4 text-xl font-medium text-neutral-300"
+          className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
-            scrollToSection("contact");
+            scrollToSection("contact", actualPath);
             setOpen(false);
           }}
+          id="navLink"
         >
           Contact
         </a>
@@ -63,6 +94,8 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
 }
 
 export default function Navbar() {
+  const actualPath = usePathname();
+
   const [open, setOpen] = useState(false);
   const [activeMainLink, setActiveMainLink] = useState(false);
 
@@ -85,30 +118,30 @@ export default function Navbar() {
 
     navLinks.forEach((navLink) => {
       if (navLink.innerHTML.toLowerCase() === currentSection.id) {
-        navLink.classList.add("font-semibold");
-        navLink.classList.add("text-white");
-        navLink.classList.add("border-b-4");
-        navLink.classList.add("border-violet-700");
         navLink.classList.remove("border-transparent");
+        navLink.classList.add(
+          "font-semibold",
+          "text-white",
+          "border-violet-700"
+        );
       } else {
-        navLink.classList.remove("font-semibold");
-        navLink.classList.remove("text-white");
-        navLink.classList.remove("border-b-4");
-        navLink.classList.remove("border-violet-700");
+        navLink.classList.remove(
+          "font-semibold",
+          "text-white",
+          "border-violet-700"
+        );
         navLink.classList.add("border-transparent");
       }
     });
 
-    // If the current section is the hero section, do something fancy with the #mainLink
     const mainLink = document.querySelector("#mainLink");
+
     if (currentSection.id === "hero") {
       mainLink?.classList.remove("text-white");
       mainLink?.classList.remove("animate-slide-up");
       mainLink?.classList.add("animate-slide-down");
-      // mainLink?.classList.add("font-semibold");
     } else {
       setActiveMainLink(true);
-      // mainLink?.classList.remove("font-semibold");
       mainLink?.classList.remove("animate-slide-down");
       mainLink?.classList.add("animate-slide-up");
       mainLink?.classList.add("text-white");
@@ -122,80 +155,89 @@ export default function Navbar() {
   });
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-neutral-950 backdrop-blur-md">
-      <MobileNav open={open} setOpen={setOpen} />
-      <div className="flex items-center justify-start w-full">
-        <a
-          className={`text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer ${
-            activeMainLink ? "animate-slide-down" : "hidden"
-          }`}
-          onClick={() => {
-            scrollToSection("main");
-            setOpen(false);
-          }}
-          id="mainLink"
-        >
-          Facundo Venturi
-        </a>
-      </div>
-      <div className="flex items-center justify-end w-9/12">
-        <div className="flex flex-row items-center justify-between gap-5 ">
-          <div
-            className="relative z-50 flex flex-col items-center justify-between w-8 h-8 md:hidden"
+    // from-neutral-950
+    <>
+      <ScrollIndicator />
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-black backdrop-blur-md">
+        <MobileNav open={open} setOpen={setOpen} actualPath={actualPath} />
+        <div className="flex items-center justify-start w-full">
+          <a
+            className={`text-xl sm:text-2xl md:text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer ${
+              activeMainLink ? "animate-slide-down" : "hidden"
+            }`}
             onClick={() => {
-              setOpen(!open);
+              scrollToSection("main", actualPath);
+              setOpen(false);
             }}
+            id="mainLink"
+            tabIndex={0}
           >
-            {/* hamburger button */}
-            <span
-              className={`h-1 w-full bg-black dark:bg-white rounded-lg transform transition duration-300 ease-in-out ${
-                open ? "rotate-45 translate-y-3.5" : ""
-              }`}
-            />
-            <span
-              className={`h-1 w-full bg-black dark:bg-white rounded-lg transition-all duration-300 ease-in-out ${
-                open ? "-rotate-45 -translate-y-0" : ""
-              }`}
-            />
-            <span
-              className={`h-1 w-full bg-black dark:bg-white rounded-lg transform transition duration-300 ease-in-out ${
-                open ? "-rotate-45 -translate-y-3.5" : ""
-              }`}
-            />
+            Facundo Venturi
+          </a>
+        </div>
+        <div className="flex items-center justify-end w-9/12">
+          <div className="flex flex-row items-center justify-between gap-5 ">
+            <div
+              className="relative z-50 flex flex-col items-center justify-between w-8 h-8 md:hidden"
+              onClick={() => {
+                setOpen(!open);
+              }}
+              tabIndex={0}
+            >
+              {/* hamburger button */}
+              <span
+                className={`h-1 w-full bg-black dark:bg-white rounded-lg transform transition duration-300 ease-in-out ${
+                  open ? "rotate-45 translate-y-3.5" : ""
+                }`}
+              />
+              <span
+                className={`h-1 w-full bg-black dark:bg-white rounded-lg transition-all duration-300 ease-in-out ${
+                  open ? "-rotate-45 -translate-y-0" : ""
+                }`}
+              />
+              <span
+                className={`h-1 w-full bg-black dark:bg-white rounded-lg transform transition duration-300 ease-in-out ${
+                  open ? "-rotate-45 -translate-y-3.5" : ""
+                }`}
+              />
+            </div>
+          </div>
+
+          <div className="hidden pr-4 md:flex md:space-x-6">
+            <a
+              className="h-20 text-xl text-center cursor-pointer text-neutral-300 
+              leading-[4] border-b-4 border-transparent"
+              onClick={() => {
+                scrollToSection("skills", actualPath);
+              }}
+              id="navLink"
+              tabIndex={0}
+            >
+              Skills
+            </a>
+            <a
+              className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
+              onClick={() => {
+                scrollToSection("projects", actualPath);
+              }}
+              id="navLink"
+              tabIndex={0}
+            >
+              Projects
+            </a>
+            <a
+              className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
+              onClick={() => {
+                scrollToSection("contact", actualPath);
+              }}
+              id="navLink"
+              tabIndex={0}
+            >
+              Contact
+            </a>
           </div>
         </div>
-
-        <div className="hidden pr-4 md:flex md:space-x-6">
-          <a
-            className="h-20 text-xl text-center cursor-pointer text-neutral-300 
-            leading-[4]"
-            onClick={() => {
-              scrollToSection("skills");
-            }}
-            id="navLink"
-          >
-            Skills
-          </a>
-          <a
-            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4]"
-            onClick={() => {
-              scrollToSection("projects");
-            }}
-            id="navLink"
-          >
-            Projects
-          </a>
-          <a
-            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4]"
-            onClick={() => {
-              scrollToSection("contact");
-            }}
-            id="navLink"
-          >
-            Contact
-          </a>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }

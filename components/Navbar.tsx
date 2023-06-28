@@ -17,12 +17,16 @@ function scrollToSection(section: string, actualPath: string) {
     return;
   }
 
-  window.location.hash = hash;
+  if (window.location.hash.toString().replace("#", "") === hash) {
+    console.log(window.location.hash);
+    var targetSection = document.getElementById(section);
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: "smooth" });
+    }
+    return;
+  }
 
-  // var targetSection = document.getElementById(section);
-  // if (targetSection) {
-  //   targetSection.scrollIntoView({ behavior: "smooth" });
-  // }
+  window.location.hash = hash;
 }
 
 function findCurrentSection(sections: NodeListOf<HTMLElement>) {

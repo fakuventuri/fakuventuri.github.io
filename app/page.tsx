@@ -17,9 +17,9 @@ export default function Home() {
 
       <section
         id="skills"
-        className="flex flex-col justify-start items-center w-full h-fit pt-20 scroll-mt-0"
+        className="flex flex-col justify-start items-center w-full h-fit pt-16 scroll-mt-0"
       >
-        <h1 className="w-fit tracking-[3px] text-[2em] font-[Arial] text-white mb-10 mt-5 uppercase">
+        <h1 className="w-fit tracking-[3px] text-[2em] font-[Arial] text-white mb-6 mt-6 uppercase">
           Skills
         </h1>
         <Skills />
@@ -28,9 +28,9 @@ export default function Home() {
       <section
         id="projects"
         className="flex flex-col justify-start items-center w-full 
-        min-h-[calc(100vh-4rem)] h-fit pt-20 scroll-mt-0"
+        min-h-[calc(100vh-4rem)] h-fit pt-16 scroll-mt-0"
       >
-        <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white mb-10 mt-5 uppercase">
+        <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white mb-6 mt-6 uppercase">
           Projects
         </h1>
         <Projects />
@@ -38,9 +38,9 @@ export default function Home() {
 
       {/* <section
         id="contact"
-        className="flex flex-col justify-start items-center w-full h-screen pt-20 scroll-mt-0"
+        className="flex flex-col justify-start items-center w-full h-screen pt-16 scroll-mt-0"
       >
-        <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white mb-10 mt-5 uppercase">
+        <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white mb-6 mt-6 uppercase">
           Contact
         </h1>
       </section> */}

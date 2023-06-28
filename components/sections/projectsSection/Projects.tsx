@@ -1,6 +1,6 @@
 import Project from "@/types/project";
 
-import ProjectCard from "@/components/ProjectCard";
+import ProjectCard from "@/components/sections/projectsSection/ProjectCard";
 
 export default function Projects() {
   const projects: Project[] = [

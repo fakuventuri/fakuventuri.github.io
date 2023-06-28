@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer";
 import Hero from "@/components/sections/Hero";
-import Projects from "@/components/sections/Projects";
+import Projects from "@/components/sections/projectsSection/Projects";
 import Skills from "@/components/sections/Skills";
 
 export default function Home() {

@@ -6,7 +6,7 @@ export default function Footer() {
           &copy; {new Date().getFullYear()}{" "}
           <a
             className="hover:underline"
-            href=""
+            href="https://fakuventuri.github.io/"
             target="_blank"
             rel="noopener noreferrer"
           >

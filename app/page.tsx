@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/sections/Hero";
 import Projects from "@/components/sections/projectsSection/Projects";
 import Skills from "@/components/sections/skillsSection/Skills";
-import FloatingButtons from "@/components/FloatingButtons";
 
 export default function Home() {
   return (
@@ -47,7 +46,6 @@ export default function Home() {
       </section> */}
 
       <ScrollArrows />
-      <FloatingButtons />
       <Footer />
     </main>
   );

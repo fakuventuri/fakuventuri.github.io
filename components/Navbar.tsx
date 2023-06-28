@@ -5,15 +5,24 @@ import { useEffect, useState } from "react";
 
 import ScrollIndicator from "@/components/ScrollIndicator";
 
-function scrollToSection(section: string) {
-  window.location.hash = section;
-  if (section === "main") {
-    window.location.hash = "";
+function scrollToSection(section: string, actualPath: string) {
+  let hash = "";
+
+  if (section !== "main") {
+    hash = section;
   }
-  var targetSection = document.getElementById(section);
-  if (targetSection) {
-    targetSection.scrollIntoView({ behavior: "smooth" });
+
+  if (actualPath !== "/") {
+    window.location.href = "/#" + hash;
+    return;
   }
+
+  window.location.hash = hash;
+
+  // var targetSection = document.getElementById(section);
+  // if (targetSection) {
+  //   targetSection.scrollIntoView({ behavior: "smooth" });
+  // }
 }
 
 function findCurrentSection(sections: NodeListOf<HTMLElement>) {
@@ -29,7 +38,15 @@ function findCurrentSection(sections: NodeListOf<HTMLElement>) {
   return currentSection;
 }
 
-function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
+function MobileNav({
+  open,
+  setOpen,
+  actualPath,
+}: {
+  open: boolean;
+  setOpen: Function;
+  actualPath: string;
+}) {
   return (
     <div
       className={`fixed top-20 left-0 h-screen w-full overflow-hidden bg-black/95 sm:hidden transform ${
@@ -40,7 +57,7 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
         <a
           className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
-            scrollToSection("skills");
+            scrollToSection("skills", actualPath);
             setOpen(false);
           }}
           id="navLink"
@@ -50,7 +67,7 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
         <a
           className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
-            scrollToSection("projects");
+            scrollToSection("projects", actualPath);
             setOpen(false);
           }}
           id="navLink"
@@ -60,7 +77,7 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
         <a
           className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
-            scrollToSection("contact");
+            scrollToSection("contact", actualPath);
             setOpen(false);
           }}
           id="navLink"
@@ -73,7 +90,7 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
 }
 
 export default function Navbar() {
-  const path = usePathname();
+  const actualPath = usePathname();
 
   const [open, setOpen] = useState(false);
   const [activeMainLink, setActiveMainLink] = useState(false);
@@ -87,10 +104,6 @@ export default function Navbar() {
   }, [open]);
 
   const handleScroll = () => {
-    if (path !== "/") {
-      return;
-    }
-
     const Sections = document.querySelectorAll("section");
 
     const currentSection = findCurrentSection(
@@ -118,6 +131,7 @@ export default function Navbar() {
     });
 
     const mainLink = document.querySelector("#mainLink");
+
     if (currentSection.id === "hero") {
       mainLink?.classList.remove("text-white");
       mainLink?.classList.remove("animate-slide-up");
@@ -141,14 +155,14 @@ export default function Navbar() {
     <>
       <ScrollIndicator />
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-black backdrop-blur-md">
-        <MobileNav open={open} setOpen={setOpen} />
+        <MobileNav open={open} setOpen={setOpen} actualPath={actualPath} />
         <div className="flex items-center justify-start w-full">
           <a
             className={`text-xl sm:text-2xl md:text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer ${
               activeMainLink ? "animate-slide-down" : "hidden"
             }`}
             onClick={() => {
-              scrollToSection("main");
+              scrollToSection("main", actualPath);
               setOpen(false);
             }}
             id="mainLink"
@@ -188,7 +202,7 @@ export default function Navbar() {
               className="h-20 text-xl text-center cursor-pointer text-neutral-300 
               leading-[4] border-b-4 border-transparent"
               onClick={() => {
-                scrollToSection("skills");
+                scrollToSection("skills", actualPath);
               }}
               id="navLink"
             >
@@ -197,7 +211,7 @@ export default function Navbar() {
             <a
               className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
               onClick={() => {
-                scrollToSection("projects");
+                scrollToSection("projects", actualPath);
               }}
               id="navLink"
             >
@@ -206,7 +220,7 @@ export default function Navbar() {
             <a
               className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
               onClick={() => {
-                scrollToSection("contact");
+                scrollToSection("contact", actualPath);
               }}
               id="navLink"
             >

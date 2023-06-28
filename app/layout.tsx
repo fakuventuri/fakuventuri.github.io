@@ -20,7 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className="select-none scroll-smooth overflow-x-hidden">
+    <html
+      lang="es"
+      className="select-none scroll-smooth overflow-x-hidden hideScrollbar"
+    >
       <body className={inter.className + " min-h-screen"}>
         <Navbar />
         {children}

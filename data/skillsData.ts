@@ -11,8 +11,7 @@ const skills: Skill[] = [
   { name: "React Native", icon: "react-native.svg" },
   { name: "Python", icon: "python.svg" },
   { name: "Firebase", icon: "firebase.svg" },
-  // { name: "DataBase", icon: "database.svg" },
-
+  { name: "GitHub", icon: "github.svg" },
   { name: "C#", icon: "csharp.svg" },
   { name: "Unity", icon: "unity.svg" },
   { name: "Java", icon: "java.svg" },

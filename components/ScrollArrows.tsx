@@ -35,7 +35,8 @@ export default function ScrollArrows() {
     <>
       <div className={"fixed justify-center bottom-5 right-1/2 left-1/2 group"}>
         <div
-          className={`bg-neutral-950 hover:bg-neutral-900 duration-200 p-2 w-10 h-10 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg rounded-full flex items-center justify-center md:cursor-pointer ${
+          className={`bg-neutral-950 hover:bg-neutral-900 duration-200 p-2 w-10 h-10 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg 
+          rounded-full flex items-center justify-center md:cursor-pointer ${
             !scrollTrigger ? "animate-bounce" : "animate-slide-down"
           }`}
           onClick={() => {
@@ -59,11 +60,12 @@ export default function ScrollArrows() {
 
       <div
         className={
-          "fixed justify-center bottom-6 right-8 hover:scale-110 duration-200 group"
+          "fixed justify-center bottom-4 right-4 hover:scale-110 duration-200 group"
         }
       >
         <div
-          className={`animate-bounce bg-neutral-950 group-hover:bg-neutral-900 duration-200 p-2 w-10 h-10 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg rounded-full flex items-center justify-center md:cursor-pointer transition-all ${
+          className={`bg-neutral-950 group-hover:bg-neutral-900 duration-200 
+          p-2 w-10 h-10 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg rounded-full flex items-center justify-center md:cursor-pointer transition-all ${
             scrollTrigger
               ? " animate-slide-up "
               : ` ${activeBackToTopButton ? "animate-slide-down" : " hidden"}`

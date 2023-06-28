@@ -16,7 +16,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           <h3 className="mb-2 text-xl font-semibold text-gray-100 whitespace-nowrap">
             {project.name}
           </h3>
-          <p className="mb-4 text-sm text-gray-400 whitespace-pre-line">
+          <p className="mb-4 text-sm text-gray-400 whitespace-pre-line group-hover:text-gray-200">
             {project.description}
           </p>
         </div>

@@ -6,7 +6,13 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <div
       className="group cursor-pointer"
-      onClick={() => window.open(project.link, "_blank")}
+      onClick={() => {
+        if (project.link.includes(".")) {
+          window.open(project.link, "_blank");
+        } else {
+          window.open(project.link, "_self");
+        }
+      }}
     >
       <div className="flex flex-col items-center justify-between h-full p-6 text-center transition-all duration-1000 ease-out border-2 border-black border-solid rounded-lg shadow-lg group-hover:-translate-y-4 group-hover:shadow-violet-700 group-hover:duration-100 bg-violet-950 hover:bg-violet-900 hover:duration-100">
         <div>

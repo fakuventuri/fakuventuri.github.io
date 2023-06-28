@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import ScrollIndicator from "@/components/ScrollIndicator";
@@ -72,6 +73,8 @@ function MobileNav({ open, setOpen }: { open: boolean; setOpen: Function }) {
 }
 
 export default function Navbar() {
+  const path = usePathname();
+
   const [open, setOpen] = useState(false);
   const [activeMainLink, setActiveMainLink] = useState(false);
 
@@ -84,6 +87,10 @@ export default function Navbar() {
   }, [open]);
 
   const handleScroll = () => {
+    if (path !== "/") {
+      return;
+    }
+
     const Sections = document.querySelectorAll("section");
 
     const currentSection = findCurrentSection(

@@ -1,4 +1,5 @@
 type Project = {
+  id: number;
   name: string;
   skills: string[];
   description: string;

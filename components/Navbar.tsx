@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+import ScrollIndicator from "@/components/ScrollIndicator";
+
 function scrollToSection(section: string) {
+  window.location.hash = section;
+  if (section === "main") {
+    window.location.hash = "";
+  }
   var targetSection = document.getElementById(section);
   if (targetSection) {
     targetSection.scrollIntoView({ behavior: "smooth" });
@@ -125,80 +131,83 @@ export default function Navbar() {
 
   return (
     // from-neutral-950
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-black backdrop-blur-md">
-      <MobileNav open={open} setOpen={setOpen} />
-      <div className="flex items-center justify-start w-full">
-        <a
-          className={`text-xl sm:text-2xl md:text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer ${
-            activeMainLink ? "animate-slide-down" : "hidden"
-          }`}
-          onClick={() => {
-            scrollToSection("main");
-            setOpen(false);
-          }}
-          id="mainLink"
-        >
-          Facundo Venturi
-        </a>
-      </div>
-      <div className="flex items-center justify-end w-9/12">
-        <div className="flex flex-row items-center justify-between gap-5 ">
-          <div
-            className="relative z-50 flex flex-col items-center justify-between w-8 h-8 md:hidden"
+    <>
+      <ScrollIndicator />
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-black backdrop-blur-md">
+        <MobileNav open={open} setOpen={setOpen} />
+        <div className="flex items-center justify-start w-full">
+          <a
+            className={`text-xl sm:text-2xl md:text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer ${
+              activeMainLink ? "animate-slide-down" : "hidden"
+            }`}
             onClick={() => {
-              setOpen(!open);
+              scrollToSection("main");
+              setOpen(false);
             }}
+            id="mainLink"
           >
-            {/* hamburger button */}
-            <span
-              className={`h-1 w-full bg-black dark:bg-white rounded-lg transform transition duration-300 ease-in-out ${
-                open ? "rotate-45 translate-y-3.5" : ""
-              }`}
-            />
-            <span
-              className={`h-1 w-full bg-black dark:bg-white rounded-lg transition-all duration-300 ease-in-out ${
-                open ? "-rotate-45 -translate-y-0" : ""
-              }`}
-            />
-            <span
-              className={`h-1 w-full bg-black dark:bg-white rounded-lg transform transition duration-300 ease-in-out ${
-                open ? "-rotate-45 -translate-y-3.5" : ""
-              }`}
-            />
+            Facundo Venturi
+          </a>
+        </div>
+        <div className="flex items-center justify-end w-9/12">
+          <div className="flex flex-row items-center justify-between gap-5 ">
+            <div
+              className="relative z-50 flex flex-col items-center justify-between w-8 h-8 md:hidden"
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
+              {/* hamburger button */}
+              <span
+                className={`h-1 w-full bg-black dark:bg-white rounded-lg transform transition duration-300 ease-in-out ${
+                  open ? "rotate-45 translate-y-3.5" : ""
+                }`}
+              />
+              <span
+                className={`h-1 w-full bg-black dark:bg-white rounded-lg transition-all duration-300 ease-in-out ${
+                  open ? "-rotate-45 -translate-y-0" : ""
+                }`}
+              />
+              <span
+                className={`h-1 w-full bg-black dark:bg-white rounded-lg transform transition duration-300 ease-in-out ${
+                  open ? "-rotate-45 -translate-y-3.5" : ""
+                }`}
+              />
+            </div>
+          </div>
+
+          <div className="hidden pr-4 md:flex md:space-x-6">
+            <a
+              className="h-20 text-xl text-center cursor-pointer text-neutral-300 
+              leading-[4] border-b-4 border-transparent"
+              onClick={() => {
+                scrollToSection("skills");
+              }}
+              id="navLink"
+            >
+              Skills
+            </a>
+            <a
+              className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
+              onClick={() => {
+                scrollToSection("projects");
+              }}
+              id="navLink"
+            >
+              Projects
+            </a>
+            <a
+              className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
+              onClick={() => {
+                scrollToSection("contact");
+              }}
+              id="navLink"
+            >
+              Contact
+            </a>
           </div>
         </div>
-
-        <div className="hidden pr-4 md:flex md:space-x-6">
-          <a
-            className="h-20 text-xl text-center cursor-pointer text-neutral-300 
-            leading-[4] border-b-4 border-transparent"
-            onClick={() => {
-              scrollToSection("skills");
-            }}
-            id="navLink"
-          >
-            Skills
-          </a>
-          <a
-            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
-            onClick={() => {
-              scrollToSection("projects");
-            }}
-            id="navLink"
-          >
-            Projects
-          </a>
-          <a
-            className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
-            onClick={() => {
-              scrollToSection("contact");
-            }}
-            id="navLink"
-          >
-            Contact
-          </a>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }

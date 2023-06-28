@@ -118,19 +118,27 @@ export default function Navbar() {
 
     navLinks.forEach((navLink) => {
       if (navLink.innerHTML.toLowerCase() === currentSection.id) {
-        navLink.classList.remove("border-transparent");
+        navLink.classList.remove(
+          "border-transparent",
+          "hover:text-neutral-200",
+          "hover:border-neutral-700"
+        );
         navLink.classList.add(
-          "font-semibold",
+          // "font-semibold",
           "text-white",
           "border-violet-700"
         );
       } else {
         navLink.classList.remove(
-          "font-semibold",
+          // "font-semibold",
           "text-white",
           "border-violet-700"
         );
-        navLink.classList.add("border-transparent");
+        navLink.classList.add(
+          "border-transparent",
+          "hover:text-neutral-200",
+          "hover:border-neutral-700"
+        );
       }
     });
 
@@ -162,7 +170,7 @@ export default function Navbar() {
         <MobileNav open={open} setOpen={setOpen} actualPath={actualPath} />
         <div className="flex items-center justify-start w-full">
           <a
-            className={`text-xl sm:text-2xl md:text-3xl font-semibold text-white whitespace-nowrap md:cursor-pointer ${
+            className={`text-xl sm:text-2xl md:text-3xl font-semibold text-neutral-200 whitespace-nowrap md:cursor-pointer ${
               activeMainLink ? "animate-slide-down" : "hidden"
             }`}
             onClick={() => {
@@ -205,7 +213,8 @@ export default function Navbar() {
 
           <div className="hidden pr-4 md:flex md:space-x-6">
             <a
-              className="h-20 text-xl text-center cursor-pointer text-neutral-300 
+              className="h-20 text-xl text-center cursor-pointer 
+              text-neutral-300
               leading-[4] border-b-4 border-transparent"
               onClick={() => {
                 scrollToSection("skills", actualPath);

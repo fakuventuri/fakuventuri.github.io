@@ -1,6 +1,9 @@
+import Rain from "@/components/Rain";
+
 export default function Hero() {
   return (
     <div className="flex items-center justify-center w-screen h-full px-4 sm:px-6 lg:px-8">
+      <Rain />
       <div className="flex flex-col items-center justify-center text-center max-w-7xl">
         <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-8xl whitespace-nowrap">
           Facundo Venturi

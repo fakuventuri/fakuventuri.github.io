@@ -25,7 +25,8 @@ export default function Home() {
 
       <section
         id="projects"
-        className="flex flex-col justify-start items-center w-full h-fit pt-20 scroll-mt-0"
+        className="flex flex-col justify-start items-center w-full 
+        min-h-[calc(100vh-5rem)] h-fit pt-20 scroll-mt-0"
       >
         <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white mb-10 mt-5 uppercase">
           Projects

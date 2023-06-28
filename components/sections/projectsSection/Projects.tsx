@@ -23,24 +23,24 @@ export default function Projects() {
       description: "This is a project description",
       link: "https://github.com",
     },
-    {
-      name: "Project 4",
-      skills: ["React", "NextJS", "TailwindCSS", "TypeScript", "Vercel"],
-      description: "This is a project description",
-      link: "https://github.com",
-    },
-    {
-      name: "Project 5",
-      skills: ["React", "NextJS", "TailwindCSS", "TypeScript", "Vercel"],
-      description: "This is a project description",
-      link: "https://github.com",
-    },
-    {
-      name: "Project 6",
-      skills: ["React", "NextJS", "TailwindCSS", "TypeScript", "Vercel"],
-      description: "This is a project description",
-      link: "https://github.com",
-    },
+    // {
+    //   name: "Project 4",
+    //   skills: ["React", "NextJS", "TailwindCSS", "TypeScript", "Vercel"],
+    //   description: "This is a project description",
+    //   link: "https://github.com",
+    // },
+    // {
+    //   name: "Project 5",
+    //   skills: ["React", "NextJS", "TailwindCSS", "TypeScript", "Vercel"],
+    //   description: "This is a project description",
+    //   link: "https://github.com",
+    // },
+    // {
+    //   name: "Project 6",
+    //   skills: ["React", "NextJS", "TailwindCSS", "TypeScript", "Vercel"],
+    //   description: "This is a project description",
+    //   link: "https://github.com",
+    // },
   ];
 
   return (

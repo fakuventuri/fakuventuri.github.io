@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 // Components
 // import SocialButtons from "@/components/SocialButtons";
 import Navbar from "@/components/Navbar";
+import FloatingButtons from "@/components/FloatingButtons";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={inter.className + " min-h-screen"}>
         <Navbar />
         {children}
+        <FloatingButtons />
       </body>
     </html>
   );

@@ -9,7 +9,7 @@ function scrollToSection(section: string) {
   }
 }
 
-export default function ScrollArrows() {
+export default function ScrollArrows({ onlyUp = false }) {
   const [activeBackToTopButton, setActiveBackToTopButton] = useState(false);
   const [scrollTrigger, setScrollTrigger] = useState(false);
 
@@ -33,30 +33,35 @@ export default function ScrollArrows() {
 
   return (
     <>
-      <div className={"fixed justify-center bottom-5 right-1/2 left-1/2 group"}>
+      {!onlyUp && (
         <div
-          className={`bg-neutral-950 hover:bg-neutral-900 duration-200 p-2 w-10 h-10 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg 
+          className={"fixed justify-center bottom-4 right-1/2 left-1/2 group"}
+        >
+          <div
+            className={`bg-neutral-950 hover:bg-neutral-900 duration-200 p-2
+           w-8 h-8 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg 
           rounded-full flex items-center justify-center md:cursor-pointer ${
             !scrollTrigger ? "animate-bounce" : "animate-slide-down"
           }`}
-          onClick={() => {
-            scrollToSection("skills");
-            window.location.hash = "skills";
-          }}
-        >
-          <svg
-            className="w-6 h-6 text-violet-700"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2.5"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+            onClick={() => {
+              scrollToSection("skills");
+              window.location.hash = "skills";
+            }}
           >
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
+            <svg
+              className="w-6 h-6 text-violet-700"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2.5"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </div>
         </div>
-      </div>
+      )}
 
       <div
         className={

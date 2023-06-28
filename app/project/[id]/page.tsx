@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import ScrollArrows from "@/components/ScrollArrows";
 
 import ProjectView from "@/components/projectView";
 
@@ -28,6 +29,7 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
         {project && <ProjectView project={project} />}
       </section>
 
+      <ScrollArrows onlyUp />
       <Footer />
     </main>
   );

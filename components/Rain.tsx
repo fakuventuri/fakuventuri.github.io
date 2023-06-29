@@ -1,34 +1,29 @@
+// @refresh reset
 "use client";
 
 import { useEffect } from "react";
 
-const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+const characters = "<>{}();<>{}();abcdefghijklmnopqrstuwxyz0123456789";
 
 const charactersLength = characters.length;
 
 class Star {
   x: number;
   y: number;
-  z: number;
-  xPrev: number;
-  yPrev: number;
   char: string;
+  containerSize: { width: number; height: number };
 
-  constructor(x = 0, y = 0, z = 0) {
+  constructor(x = 0, y = 0, z = 0, containerSize = { width: 0, height: 0 }) {
     this.x = x;
     this.y = y;
-    this.z = z;
-    this.xPrev = x;
-    this.yPrev = y;
     this.char = characters.charAt(Math.floor(Math.random() * charactersLength));
+    this.containerSize = containerSize;
   }
 
   update(width: number, height: number, speed: number) {
-    this.xPrev = this.x;
-    this.yPrev = this.y;
-    this.z += speed * 0.0675;
-    this.x += this.x * (speed * 0.0225) * this.z;
-    this.y += this.y * (speed * 0.0225) * this.z;
+    // this.x += 100 * (speed * Math.random());
+    this.y += -100 * (speed * Math.random() * 0.3);
+
     if (
       this.x > width / 2 ||
       this.x < -width / 2 ||
@@ -36,10 +31,7 @@ class Star {
       this.y < -height / 2
     ) {
       this.x = Math.random() * width - width / 2;
-      this.y = Math.random() * height - height / 2;
-      this.xPrev = this.x;
-      this.yPrev = this.y;
-      this.z = 0;
+      this.y = height / 4 + (Math.random() * height) / 4;
     }
   }
 
@@ -47,8 +39,20 @@ class Star {
     // ctx.strokeStyle = "rgb(0, 255, 13)";
     // ctx.strokeText("🌧️", this.x, this.y);
 
-    ctx.fillStyle = "rgba(109, 40, 217, 1)";
-    ctx.font = "20px Arial";
+    // const distToCenter = Math.sqrt(this.x * this.x + this.y * this.y);
+
+    // const maxDistToCenter =
+    //   Math.sqrt(
+    //     this.containerSize.width * this.containerSize.width +
+    //       this.containerSize.height * this.containerSize.height
+    //   ) / 2;
+
+    // const opacity = 1 - (distToCenter / maxDistToCenter) * 0.1;
+
+    const opacity = 0.5 - this.y / this.containerSize.height;
+
+    ctx.fillStyle = `rgba(109, 40, 217, ${opacity})`;
+    ctx.font = "20px Lucida Console";
     ctx.fillText(this.char, this.x, this.y);
 
     // ctx.lineWidth = this.z;
@@ -60,8 +64,8 @@ class Star {
 }
 
 export default function Rain() {
-  const COUNT = 100;
-  const SPEED = 0.1;
+  const COUNT = 500;
+  const SPEED = 0.18;
 
   useEffect(() => {
     const stars = Array.from({ length: COUNT }, () => new Star(0, 0, 0));
@@ -105,12 +109,12 @@ export default function Rain() {
       for (const star of stars) {
         star.x = Math.random() * width - width / 2;
         star.y = Math.random() * height - height / 2;
-        star.z = 0;
+        star.containerSize = { width, height };
       }
 
       ctx.translate(width / 2, height / 2);
       ctx.fillStyle = "rgba(0, 0, 0, 1)";
-      ctx.strokeStyle = "rgba(109, 40, 217, 1)"; // color of the stars
+      //   ctx.strokeStyle = "rgba(109, 40, 217, 1)"; // color of the stars
       rafId = requestAnimationFrame(frame);
     }
 
@@ -121,7 +125,7 @@ export default function Rain() {
       }
       const { clientWidth: width, clientHeight: height } = container;
 
-      ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
       ctx.fillRect(-width / 2, -height / 2, width, height);
 
       for (const star of stars) {

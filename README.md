@@ -3,7 +3,7 @@ Developed with NextJS and TailwindCSS
 
 ## Deployments
 
-[> On GitHub Pages <](https://fakuventuri.github.io/)
+[>On GitHub Pages<](https://fakuventuri.github.io/)
 
 
 ## Authors

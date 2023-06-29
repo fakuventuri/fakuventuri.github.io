@@ -19,12 +19,12 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
   return (
     <main
       id="main"
-      className="flex flex-col items-center justify-center w-full min-h-screen px-6"
+      className="flex flex-col items-center justify-center w-full h-screen px-6"
     >
       <section
         id="projects"
         className="flex flex-col justify-start items-center w-full 
-        min-h-[calc(100vh-5rem)] h-fit pt-20 scroll-mt-0"
+        min-h-[calc(100vh-5rem)] h-full pt-20 scroll-mt-0"
       >
         {project && <ProjectView project={project} />}
       </section>

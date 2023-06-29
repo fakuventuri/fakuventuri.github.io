@@ -11,12 +11,15 @@ export default function ProjectCard({ project }: { project: Project }) {
       href={project.link}
       target={project.link.includes(".") ? "_blank" : "_self"}
     >
-      <div className="flex flex-col items-center justify-between h-full p-6 text-center transition-all duration-1000 ease-out border-2 border-black border-solid rounded-lg shadow-lg group-hover:-translate-y-4 group-hover:shadow-violet-700 group-hover:duration-100 bg-violet-950 hover:bg-violet-900 hover:duration-100">
+      <div className="flex flex-col items-center justify-between h-full p-6 text-center transition-all duration-1000 ease-out rounded-lg shadow-lg group-hover:-translate-y-4 group-hover:shadow-violet-700 group-hover:duration-100 bg-[rgb(25,15,45)] hover:bg-violet-950 hover:duration-100">
         <div>
-          <h3 className="mb-2 text-xl font-semibold text-gray-100 whitespace-nowrap">
+          <h3
+            className="mb-2 text-2xl text-gray-100 whitespace-nowrap font-mono
+            "
+          >
             {project.name}
           </h3>
-          <p className="mb-4 text-sm text-gray-400 whitespace-pre-line group-hover:text-gray-200">
+          <p className="mb-4 text-sm text-gray-300 whitespace-pre-line group-hover:text-gray-200">
             {project.description}
           </p>
         </div>

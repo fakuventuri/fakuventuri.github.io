@@ -1,9 +1,9 @@
+import Hero from "@/components/sections/Hero";
+import Skills from "@/components/sections/skillsSection/Skills";
+import Projects from "@/components/sections/projectsSection/Projects";
+
 import ScrollArrows from "@/components/ScrollArrows";
 import Footer from "@/components/Footer";
-
-import Hero from "@/components/sections/Hero";
-import Projects from "@/components/sections/projectsSection/Projects";
-import Skills from "@/components/sections/skillsSection/Skills";
 
 export default function Home() {
   return (

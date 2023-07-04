@@ -1,24 +1,30 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import ScrollIndicator from "@/components/ScrollIndicator";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
-function scrollToSection(section: string, actualPath: string) {
-  let hash = "";
+function scrollToSection(
+  section: string,
+  actualPath: string,
+  router: AppRouterInstance
+) {
+  let hash = section;
 
-  if (section !== "main") {
-    hash = section;
+  if (section === "main") {
+    hash = "";
   }
 
   if (actualPath !== "/") {
-    window.location.href = "/#" + hash;
+    router.push("/#" + hash);
+    // window.location.href = "/#" + hash;
     return;
   }
 
   if (window.location.hash.toString().replace("#", "") === hash) {
-    console.log(window.location.hash);
     var targetSection = document.getElementById(section);
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: "smooth" });
@@ -27,6 +33,7 @@ function scrollToSection(section: string, actualPath: string) {
   }
 
   window.location.hash = hash;
+  // router.push("/#" + hash);
 }
 
 function findCurrentSection(sections: NodeListOf<HTMLElement>) {
@@ -46,10 +53,12 @@ function MobileNav({
   open,
   setOpen,
   actualPath,
+  router,
 }: {
   open: boolean;
   setOpen: Function;
   actualPath: string;
+  router: AppRouterInstance;
 }) {
   return (
     <div
@@ -61,7 +70,7 @@ function MobileNav({
         <a
           className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
-            scrollToSection("skills", actualPath);
+            scrollToSection("skills", actualPath, router);
             setOpen(false);
           }}
           id="navLink"
@@ -71,7 +80,7 @@ function MobileNav({
         <a
           className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
-            scrollToSection("projects", actualPath);
+            scrollToSection("projects", actualPath, router);
             setOpen(false);
           }}
           id="navLink"
@@ -81,7 +90,7 @@ function MobileNav({
         <a
           className="my-4 text-xl font-medium text-center cursor-pointer text-neutral-300 w-fit border-b-4 border-transparent"
           onClick={() => {
-            scrollToSection("contact", actualPath);
+            scrollToSection("contact", actualPath, router);
             setOpen(false);
           }}
           id="navLink"
@@ -95,6 +104,7 @@ function MobileNav({
 
 export default function Navbar() {
   const actualPath = usePathname();
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
   const [activeMainLink, setActiveMainLink] = useState(false);
@@ -113,6 +123,10 @@ export default function Navbar() {
     const currentSection = findCurrentSection(
       Sections as NodeListOf<HTMLElement>
     );
+
+    if (!currentSection) {
+      return;
+    }
 
     const navLinks = document.querySelectorAll("#navLink");
 
@@ -167,14 +181,19 @@ export default function Navbar() {
     <>
       <ScrollIndicator />
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center h-20 px-4 filter bg-gradient-to-t from-black backdrop-blur-md">
-        <MobileNav open={open} setOpen={setOpen} actualPath={actualPath} />
+        <MobileNav
+          open={open}
+          setOpen={setOpen}
+          actualPath={actualPath}
+          router={router}
+        />
         <div className="flex items-center justify-start w-full">
           <a
             className={`text-xl sm:text-2xl md:text-3xl font-semibold text-neutral-200 whitespace-nowrap md:cursor-pointer ${
               activeMainLink ? "animate-slide-down" : "hidden"
             }`}
             onClick={() => {
-              scrollToSection("main", actualPath);
+              scrollToSection("main", actualPath, router);
               setOpen(false);
             }}
             id="mainLink"
@@ -217,7 +236,7 @@ export default function Navbar() {
               text-neutral-300
               leading-[4] border-b-4 border-transparent"
               onClick={() => {
-                scrollToSection("skills", actualPath);
+                scrollToSection("skills", actualPath, router);
               }}
               id="navLink"
               tabIndex={0}
@@ -227,7 +246,7 @@ export default function Navbar() {
             <a
               className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
               onClick={() => {
-                scrollToSection("projects", actualPath);
+                scrollToSection("projects", actualPath, router);
               }}
               id="navLink"
               tabIndex={0}
@@ -237,7 +256,7 @@ export default function Navbar() {
             <a
               className="h-20 text-xl text-center cursor-pointer text-neutral-300 leading-[4] border-b-4 border-transparent"
               onClick={() => {
-                scrollToSection("contact", actualPath);
+                scrollToSection("contact", actualPath, router);
               }}
               id="navLink"
               tabIndex={0}

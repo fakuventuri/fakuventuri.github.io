@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 
+import Secret from "./Secret";
+
 function scrollToSection(section: string) {
   var targetSection = document.getElementById(section);
   if (targetSection) {
@@ -34,33 +36,35 @@ export default function ScrollArrows({ onlyUp = false }) {
   return (
     <>
       {!onlyUp && (
-        <div
-          className={"fixed justify-center bottom-4 right-1/2 left-1/2 group"}
-        >
+        <Secret>
           <div
-            className={`bg-neutral-950 hover:bg-neutral-900 duration-200 p-2
-           w-8 h-8 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg 
-          rounded-full flex items-center justify-center md:cursor-pointer ${
-            !scrollTrigger ? "animate-bounce" : "animate-slide-down"
-          }`}
-            onClick={() => {
-              scrollToSection("skills");
-              window.location.hash = "skills";
-            }}
+            className={"fixed justify-center bottom-4 right-1/2 left-1/2 group"}
           >
-            <svg
-              className="w-6 h-6 text-violet-700"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2.5"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+            <div
+              className={`bg-neutral-950 hover:bg-neutral-900 duration-200 p-2
+             w-8 h-8 ring-1 ring-slate-200/20 shadow-neutral-800 shadow-lg 
+            rounded-full flex items-center justify-center md:cursor-pointer ${
+              !scrollTrigger ? "animate-bounce" : "animate-slide-down"
+            }`}
+              onClick={() => {
+                scrollToSection("skills");
+                window.location.hash = "skills";
+              }}
             >
-              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
+              <svg
+                className="w-6 h-6 text-violet-700"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2.5"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              </svg>
+            </div>
           </div>
-        </div>
+        </Secret>
       )}
 
       <div

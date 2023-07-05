@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function LoadingPage({
   children,
@@ -23,7 +24,7 @@ export default function LoadingPage({
     <>
       {displayLoading && (
         <div
-          className={`fixed inset-0 z-[100] w-screen h-screen bg-violet-700 flex justify-center items-center transition-opacity duration-[500ms] ease-in-out
+          className={`fixed inset-0 z-[100] w-screen h-screen bg-black flex justify-center items-center transition-opacity duration-[500ms] ease-in-out
            ${
              loading
                ? "opacity-100 pointer-events-auto overflow-hidden"
@@ -31,7 +32,7 @@ export default function LoadingPage({
            }
         }`}
         >
-          <p className="text-white text-9xl">Loading...</p>
+          <LoadingSpinner />
         </div>
       )}
       {children}

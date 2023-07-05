@@ -37,10 +37,25 @@ module.exports = {
             visibility: "hidden",
           },
         },
+        breath: {
+          "0%": {
+            transform: "scale(1)",
+            borderColor: "rgba(109, 40, 217, 1)",
+          },
+          "50%": {
+            transform: "scale(1.1)",
+            borderColor: "rgba(255, 255, 255, 1)",
+          },
+          "100%": {
+            transform: "scale(1)",
+            borderColor: "rgba(109, 40, 217, 1)",
+          },
+        },
       },
       animation: {
         "slide-up": "slide-up 0.5s forwards",
         "slide-down": "slide-down 0.5s forwards",
+        breath: "breath 2s ease-in-out infinite",
       },
     },
   },

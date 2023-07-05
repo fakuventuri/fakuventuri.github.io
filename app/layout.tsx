@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 // import SocialButtons from "@/components/SocialButtons";
 import Navbar from "@/components/Navbar";
 import FloatingButtons from "@/components/FloatingButtons";
+import LoadingPage from "@/components/LoadingPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +27,11 @@ export default function RootLayout({
       className="select-none scroll-smooth overflow-x-hidden hideScrollbar"
     >
       <body className={inter.className + " min-h-screen"}>
-        <Navbar />
-        {children}
-        <FloatingButtons />
+        <LoadingPage>
+          <Navbar />
+          {children}
+          <FloatingButtons />
+        </LoadingPage>
       </body>
     </html>
   );

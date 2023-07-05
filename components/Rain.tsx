@@ -13,7 +13,7 @@ class Star {
   char: string;
   containerSize: { width: number; height: number };
 
-  constructor(x = 0, y = 0, z = 0, containerSize = { width: 0, height: 0 }) {
+  constructor(x = 0, y = 0, containerSize = { width: 0, height: 0 }) {
     this.x = x;
     this.y = y;
     this.char = characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -68,7 +68,7 @@ export default function Rain() {
   const SPEED = 0.18;
 
   useEffect(() => {
-    const stars = Array.from({ length: COUNT }, () => new Star(0, 0, 0));
+    const stars = Array.from({ length: COUNT }, () => new Star(0, 0));
     let rafId = 0;
 
     const canvas = document.querySelector("#rain-canvas") as HTMLCanvasElement;

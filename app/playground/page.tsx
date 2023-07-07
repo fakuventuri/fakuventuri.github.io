@@ -12,7 +12,7 @@ export default function PlayGround() {
         className="flex flex-col justify-start items-center w-full 
             min-h-[calc(100vh-5rem)] h-full pt-20 scroll-mt-0"
       >
-        <div className="w-full h-full bg-neutral-800 rounded mb-1">
+        <div className="w-full h-full bg-neutral-800 mb-1">
           <Boids />
         </div>
       </section>

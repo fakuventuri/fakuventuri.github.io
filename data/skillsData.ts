@@ -15,7 +15,7 @@ const skills: Skill[] = [
   { name: "C#", icon: "csharp.svg" },
   { name: "Unity", icon: "unity.svg" },
   { name: "Java", icon: "java.svg" },
-  { name: "Redux", icon: "redux.svg" },
+  { name: "Rust", icon: "rust.svg" },
 ];
 
 export default skills;

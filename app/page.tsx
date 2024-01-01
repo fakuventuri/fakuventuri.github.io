@@ -4,6 +4,7 @@ import Projects from "@/components/sections/projectsSection/Projects";
 
 import ScrollArrows from "@/components/ScrollArrows";
 import Footer from "@/components/Footer";
+import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
@@ -36,14 +37,15 @@ export default function Home() {
         <Projects />
       </section>
 
-      {/* <section
+      <section
         id="contact"
-        className="flex flex-col justify-start items-center w-full h-screen pt-16 scroll-mt-0"
+        className="flex flex-col justify-start items-center w-full h-[calc(100vh-4rem)] pt-16 scroll-mt-0"
       >
         <h1 className="w-fit tracking-[3px] decoration-0 text-[2em] font-[Arial] text-white mb-6 mt-6 uppercase">
           Contact
         </h1>
-      </section> */}
+        <Contact />
+      </section>
 
       <ScrollArrows />
       <Footer />

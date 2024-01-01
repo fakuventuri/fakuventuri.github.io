@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import GitHubLogo from "@/public/stack/github.svg";
 import CVsvg from "@/public/cv.svg";
-import DownloadSVG from "@/public/download.svg";
+// import DownloadSVG from "@/public/download.svg";
 
 export default function FloatingButtons() {
   return (
